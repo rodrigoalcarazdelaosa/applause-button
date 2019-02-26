@@ -13,7 +13,8 @@
   </style>
 </head>
 <body>
-  <applause-button id="applause" multiclap="true" url="google.com"/>
+  <div id="div" style="margin-top: 2000px">hello</div>
+  <applause-button id="applause" multiclap="true" url="google.com" />
   <script type="text/javascript">
 
     const button = document.getElementById("applause");
@@ -25,6 +26,16 @@
     button.addEventListener("clapped", function(event) {
       console.log("button clapped", event.detail);
     });
+
+    var intersectionObserver = new IntersectionObserver(function (entries) {
+        // If intersectionRatio is 0, the target is out of view
+        // and we do not need to do anything.
+        console.log(entries[0].intersectionRatio);
+        if (entries[0].intersectionRatio <= 0) return;
+        console.log('Loaded new items');
+      });
+      // start observing
+      intersectionObserver.observe(document.getElementById("div"));
   </script>
 </body>
 </html>
